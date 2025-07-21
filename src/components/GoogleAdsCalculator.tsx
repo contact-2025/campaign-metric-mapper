@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Calculator, Target, Users, MousePointer, DollarSign, TrendingUp, Calendar, RotateCcw } from 'lucide-react';
+import { Calculator, Target, Users, MousePointer, DollarSign, TrendingUp, Calendar, RotateCcw, PlayCircle } from 'lucide-react';
 
 interface CalculatorInputs {
   targetSales: number;
@@ -90,11 +90,19 @@ export const GoogleAdsCalculator = () => {
       costPerClick: 0,
       avgOrderValue: 0,
     });
+    setOutputs({
+      meetingsNeeded: 0,
+      clicksNeeded: 0,
+      budgetRequired: 0,
+      expectedRevenue: 0,
+      roi: 0,
+      dailyBudget: 0,
+    });
   };
 
-  useEffect(() => {
+  const handleCalculate = () => {
     calculateOutputs();
-  }, [inputs]);
+  };
 
   const outputCards = [
     {
@@ -258,14 +266,24 @@ export const GoogleAdsCalculator = () => {
                 />
               </div>
 
-              <Button 
-                onClick={resetForm}
-                variant="outline"
-                className="w-full mt-6"
-              >
-                <RotateCcw className="h-4 w-4 mr-2" />
-                Reset Form
-              </Button>
+              <div className="flex gap-3 mt-6">
+                <Button 
+                  onClick={handleCalculate}
+                  className="flex-1 bg-gradient-primary hover:opacity-90 transition-opacity"
+                >
+                  <PlayCircle className="h-4 w-4 mr-2" />
+                  Calculate
+                </Button>
+                
+                <Button 
+                  onClick={resetForm}
+                  variant="outline"
+                  className="flex-1"
+                >
+                  <RotateCcw className="h-4 w-4 mr-2" />
+                  Reset
+                </Button>
+              </div>
             </CardContent>
           </Card>
 
