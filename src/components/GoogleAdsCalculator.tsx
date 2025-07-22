@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Calculator, Target, Users, MousePointer, DollarSign, TrendingUp, Calendar, RotateCcw, PlayCircle } from 'lucide-react';
+import { Calculator, Target, Users, MousePointer, DollarSign, TrendingUp, Calendar, RotateCcw, PlayCircle, Sun, Moon } from 'lucide-react';
 
 interface CalculatorInputs {
   targetSales: number;
@@ -24,6 +24,8 @@ interface CalculatorOutputs {
 }
 
 export const GoogleAdsCalculator = () => {
+  const [isDark, setIsDark] = useState(false);
+  
   const [inputs, setInputs] = useState<CalculatorInputs>({
     targetSales: 0,
     clickToMeeting: 0,
@@ -40,6 +42,14 @@ export const GoogleAdsCalculator = () => {
     roi: 0,
     dailyBudget: 0,
   });
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDark]);
 
   const formatCurrency = (num: number): string => {
     return '₹' + num.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
@@ -156,33 +166,45 @@ export const GoogleAdsCalculator = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background p-4 md:p-8">
-      <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-8 animate-slide-up">
+    <div className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-accent/10 p-6 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-8 animate-fade-in">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="bg-gradient-primary p-3 rounded-xl shadow-elegant">
-              <Calculator className="h-8 w-8 text-primary-foreground" />
+            <div className="p-3 bg-gradient-primary rounded-xl shadow-glow">
+              <Calculator className="h-8 w-8 text-white" />
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-              Google Ads Calculator
-            </h1>
+            <Badge variant="secondary" className="px-4 py-2 text-sm font-medium bg-gradient-accent text-white">
+              Campaign Metrics
+            </Badge>
+            <div className="flex gap-2 ml-4">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setIsDark(!isDark)}
+                className="p-2"
+              >
+                {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+              </Button>
+            </div>
           </div>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Calculate key metrics for your Google Ads campaigns and optimize your advertising budget for maximum ROI
+          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-4">
+            Google Ads Calculator
+          </h1>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            Calculate your campaign requirements, budget needs, and expected ROI with precision. 
+            Get insights for smarter advertising decisions.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
-          {/* Input Form */}
-          <Card className="shadow-card animate-scale-in">
-            <CardHeader className="pb-4">
-              <CardTitle className="flex items-center gap-2 text-xl">
-                <Target className="h-5 w-5 text-primary" />
-                Campaign Parameters
+          <Card className="shadow-elegant hover:shadow-card transition-all duration-300 animate-scale-in border-0 bg-card/90 backdrop-blur-sm">
+            <CardHeader className="text-center pb-6 bg-gradient-primary/10 rounded-t-lg">
+              <CardTitle className="text-2xl font-bold flex items-center justify-center gap-3">
+                <Target className="h-6 w-6 text-primary" />
+                Campaign Inputs
               </CardTitle>
-              <p className="text-sm text-muted-foreground">
-                Enter your campaign goals and costs to calculate required metrics
+              <p className="text-base">
+                Enter your campaign parameters to calculate optimal metrics
               </p>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -269,7 +291,7 @@ export const GoogleAdsCalculator = () => {
               <div className="flex gap-3 mt-6">
                 <Button 
                   onClick={handleCalculate}
-                  className="flex-1 bg-gradient-primary hover:opacity-90 transition-opacity"
+                  className="flex-1 bg-gradient-primary hover:shadow-glow transition-all duration-300 text-white border-0"
                 >
                   <PlayCircle className="h-4 w-4 mr-2" />
                   Calculate
@@ -278,7 +300,7 @@ export const GoogleAdsCalculator = () => {
                 <Button 
                   onClick={resetForm}
                   variant="outline"
-                  className="flex-1"
+                  className="flex-1 border-2 border-accent/50 hover:bg-accent/10 transition-all duration-300"
                 >
                   <RotateCcw className="h-4 w-4 mr-2" />
                   Reset
@@ -287,55 +309,56 @@ export const GoogleAdsCalculator = () => {
             </CardContent>
           </Card>
 
-          {/* Results */}
-          <div className="space-y-6">
-            <Card className="shadow-card animate-scale-in">
-              <CardHeader className="pb-4">
-                <CardTitle className="flex items-center gap-2 text-xl">
-                  <TrendingUp className="h-5 w-5 text-success" />
-                  Calculated Results
-                </CardTitle>
-                <p className="text-sm text-muted-foreground">
-                  Live calculations based on your input parameters
-                </p>
-              </CardHeader>
-            </Card>
+          <Card className="shadow-elegant hover:shadow-card transition-all duration-300 animate-scale-in border-0 bg-card/90 backdrop-blur-sm">
+            <CardHeader className="text-center pb-6 bg-gradient-success/10 rounded-t-lg">
+              <CardTitle className="text-2xl font-bold flex items-center justify-center gap-3">
+                <TrendingUp className="h-6 w-6 text-success" />
+                Calculated Results
+              </CardTitle>
+              <p className="text-base">
+                Your optimized campaign metrics and projections
+              </p>
+            </CardHeader>
+            <CardContent>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {outputCards.map((card, index) => {
-                const Icon = card.icon;
-                const colorClasses = {
-                  info: 'bg-info-muted border-info/20',
-                  success: 'bg-success-muted border-success/20',
-                  warning: 'bg-warning-muted border-warning/20',
-                };
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {outputCards.map((card, index) => {
+                  const Icon = card.icon;
+                  const colorClasses = {
+                    info: 'bg-gradient-to-br from-info/10 to-info/5 border-info/30 shadow-glow',
+                    success: 'bg-gradient-to-br from-success/10 to-success/5 border-success/30 shadow-glow',
+                    warning: 'bg-gradient-to-br from-warning/10 to-warning/5 border-warning/30 shadow-glow',
+                  };
 
-                return (
-                  <Card 
-                    key={card.title}
-                    className={`${colorClasses[card.color as keyof typeof colorClasses]} border-2 transition-all duration-300 hover:shadow-lg animate-scale-in`}
-                    style={{ animationDelay: `${index * 100}ms` }}
-                  >
-                    <CardContent className="p-6 text-center">
-                      <div className="flex flex-col items-center space-y-3">
-                        <Icon className="h-8 w-8 text-muted-foreground" />
-                        <div className="space-y-1">
-                          <Badge 
-                            variant="secondary" 
-                            className="text-lg font-bold px-3 py-1 bg-card shadow-sm"
-                          >
-                            {card.value > 0 ? card.formatter(card.value) : '-'}
-                          </Badge>
-                          <h3 className="font-semibold text-foreground">{card.title}</h3>
-                          <p className="text-xs text-muted-foreground">{card.description}</p>
+                  return (
+                    <Card 
+                      key={card.title}
+                      className={`${colorClasses[card.color as keyof typeof colorClasses]} border-2 transition-all duration-300 hover:scale-105 animate-scale-in backdrop-blur-sm`}
+                      style={{ animationDelay: `${index * 100}ms` }}
+                    >
+                      <CardContent className="p-6 text-center">
+                        <div className="flex flex-col items-center space-y-3">
+                          <div className="p-3 rounded-full bg-gradient-primary/10">
+                            <Icon className="h-6 w-6 text-primary" />
+                          </div>
+                          <div className="space-y-2">
+                            <Badge 
+                              variant="secondary" 
+                              className="text-xl font-bold px-4 py-2 bg-gradient-accent text-white shadow-elegant"
+                            >
+                              {card.value > 0 ? card.formatter(card.value) : '-'}
+                            </Badge>
+                            <h3 className="font-bold text-foreground text-sm">{card.title}</h3>
+                            <p className="text-xs text-muted-foreground">{card.description}</p>
+                          </div>
                         </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
-          </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </div>
