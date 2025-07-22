@@ -211,8 +211,8 @@ export const GoogleAdsCalculator = () => {
           
           {/* Main title with enhanced effects */}
           <div className="relative mb-6">
-            <h1 className="text-5xl md:text-7xl font-black bg-gradient-primary bg-clip-text text-transparent mb-2 tracking-tight leading-none">
-              <span className="relative">
+            <h1 className="text-5xl md:text-7xl font-black text-foreground mb-2 tracking-tight leading-none">
+              <span className="relative bg-gradient-primary bg-clip-text text-transparent">
                 MarketinLab
                 <div className="absolute -inset-2 bg-gradient-primary/20 blur-2xl -z-10 animate-pulse"></div>
               </span>
