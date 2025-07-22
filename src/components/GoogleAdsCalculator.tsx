@@ -168,32 +168,92 @@ export const GoogleAdsCalculator = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-muted/20 to-accent/10 p-6 transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-8 animate-fade-in">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <div className="p-3 bg-gradient-primary rounded-xl shadow-glow">
-              <Calculator className="h-8 w-8 text-white" />
+        <div className="text-center mb-12 animate-fade-in relative">
+          {/* Floating particles animation */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-10 left-1/4 w-2 h-2 bg-primary/30 rounded-full animate-pulse" style={{animationDelay: '0s'}}></div>
+            <div className="absolute top-20 right-1/3 w-1 h-1 bg-accent/40 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
+            <div className="absolute top-32 left-1/3 w-1.5 h-1.5 bg-success/30 rounded-full animate-pulse" style={{animationDelay: '2s'}}></div>
+          </div>
+          
+          <div className="flex items-center justify-center gap-4 mb-6 relative z-10">
+            {/* Animated icon with multiple layers */}
+            <div className="relative group">
+              <div className="absolute inset-0 bg-gradient-primary rounded-2xl blur-lg opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>
+              <div className="relative p-4 bg-gradient-primary rounded-2xl shadow-glow transform hover:scale-110 transition-all duration-500">
+                <Calculator className="h-10 w-10 text-white animate-pulse" />
+              </div>
+              <div className="absolute -inset-1 bg-gradient-primary rounded-2xl opacity-20 animate-ping"></div>
             </div>
-            <Badge variant="secondary" className="px-4 py-2 text-sm font-medium bg-gradient-accent text-white">
-              Campaign Metrics
-            </Badge>
-            <div className="flex gap-2 ml-4">
+            
+            {/* Futuristic badge */}
+            <div className="relative">
+              <Badge variant="secondary" className="px-6 py-3 text-sm font-bold bg-gradient-accent text-white shadow-elegant transform hover:scale-105 transition-all duration-300 border border-white/20">
+                <span className="relative z-10">⚡ AI-Powered Analytics</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-[shimmer_2s_infinite] rounded-full"></div>
+              </Badge>
+            </div>
+            
+            {/* Theme toggle with futuristic styling */}
+            <div className="flex gap-2 ml-6">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => setIsDark(!isDark)}
-                className="p-2"
+                className="p-3 border-2 border-primary/30 hover:border-primary/60 bg-background/80 backdrop-blur-sm hover:bg-primary/10 transition-all duration-300 transform hover:scale-105"
               >
-                {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                <div className="relative">
+                  {isDark ? <Sun className="h-5 w-5 text-warning animate-spin" style={{animationDuration: '3s'}} /> : <Moon className="h-5 w-5 text-primary animate-pulse" />}
+                </div>
               </Button>
             </div>
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-4">
-            Google Ads Calculator
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Calculate your campaign requirements, budget needs, and expected ROI with precision. 
-            Get insights for smarter advertising decisions.
-          </p>
+          
+          {/* Main title with enhanced effects */}
+          <div className="relative mb-6">
+            <h1 className="text-5xl md:text-7xl font-black bg-gradient-primary bg-clip-text text-transparent mb-2 tracking-tight leading-none">
+              <span className="relative">
+                Google Ads
+                <div className="absolute -inset-2 bg-gradient-primary/20 blur-2xl -z-10 animate-pulse"></div>
+              </span>
+              <br />
+              <span className="bg-gradient-accent bg-clip-text text-transparent animate-pulse" style={{animationDuration: '2s'}}>
+                Calculator Pro
+              </span>
+            </h1>
+            
+            {/* Subtitle badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-success/10 to-info/10 border border-success/20 rounded-full mb-4">
+              <div className="w-2 h-2 bg-success rounded-full animate-pulse"></div>
+              <span className="text-sm font-medium text-success">Real-time Campaign Optimization</span>
+            </div>
+          </div>
+          
+          {/* Enhanced description */}
+          <div className="space-y-4 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-foreground/90 font-medium leading-relaxed">
+              Transform your advertising strategy with 
+              <span className="bg-gradient-primary bg-clip-text text-transparent font-bold"> AI-driven insights</span>
+            </p>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              Calculate campaign requirements, optimize budgets, and predict ROI with 
+              <span className="text-primary font-semibold">military-grade precision</span>. 
+              Make data-driven decisions that maximize your advertising impact.
+            </p>
+            
+            {/* Feature highlights */}
+            <div className="flex flex-wrap justify-center gap-4 mt-6">
+              {['⚡ Instant Results', '🎯 Precision Targeting', '📊 Advanced Analytics', '🚀 ROI Optimization'].map((feature, index) => (
+                <div 
+                  key={feature}
+                  className="px-4 py-2 bg-card/50 border border-border/50 rounded-full text-sm font-medium text-muted-foreground hover:bg-primary/10 hover:border-primary/30 transition-all duration-300 transform hover:scale-105"
+                  style={{animationDelay: `${index * 200}ms`}}
+                >
+                  {feature}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
