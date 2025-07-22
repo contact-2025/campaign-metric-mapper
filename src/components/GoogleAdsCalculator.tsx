@@ -213,12 +213,12 @@ export const GoogleAdsCalculator = () => {
           <div className="relative mb-6">
             <h1 className="text-5xl md:text-7xl font-black bg-gradient-primary bg-clip-text text-transparent mb-2 tracking-tight leading-none">
               <span className="relative">
-                Google Ads
+                MarketinLab
                 <div className="absolute -inset-2 bg-gradient-primary/20 blur-2xl -z-10 animate-pulse"></div>
               </span>
               <br />
               <span className="bg-gradient-accent bg-clip-text text-transparent animate-pulse" style={{animationDuration: '2s'}}>
-                Calculator Pro
+                Analytics Pro
               </span>
             </h1>
             
